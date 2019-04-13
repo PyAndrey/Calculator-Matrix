@@ -8,12 +8,15 @@ import tkinter.messagebox as box
 
 # Functions
 # About_the_programm
+
+
 def about_programm():
     window = Tk()
     window.title("About programm")
     window.geometry("510x260+700+400")
     window.resizable(0, 0)
-    out1 = Label(window, text="Программа для расчета систем уравнений с тремя переменными")
+    out1 = Label(
+        window, text="Программа для расчета систем уравнений с тремя переменными")
     out1.pack()
     out2 = Label(window, text="Авторы")
     out2.pack()
