@@ -3,14 +3,13 @@
 # imports
 from copy import copy
 from tkinter import *
-from tkinter import ttk
-import tkinter.messagebox as box
-
+from find_determinant import *
+import numpy as np
 # Functions
-# About_the_programm
 
 
 def about_programm():
+    """About_the_programm"""
     window = Tk()
     window.title("About programm")
     window.geometry("510x260+700+400")
@@ -25,10 +24,9 @@ def about_programm():
     out4 = Label(window, text="Яковлев Олег")
     out4.pack()
 
-# Calculation
-
 
 def calc():
+    """Calculation"""
     s1 = input1.get()
     s2 = input2.get()
     s3 = input3.get()
@@ -59,22 +57,13 @@ def calc():
                 box.showerror("Error", "Должны быть только цифры!")
         return list2
 
-    def finding_determinant(list1: list, list2: list, list3: list) -> int:
-        opr = list1[0]*list2[1]*list3[2]
-        opr2 = list1[1]*list2[2]*list3[0]
-        opr3 = list1[2]*list2[0]*list3[1]
-        opr4 = list1[2]*list2[1]*list3[0]
-        opr5 = list1[0]*list2[2]*list3[1]
-        opr6 = list1[1]*list2[0]*list3[2]
-        found_determinant = opr + opr2 + opr3 - opr4 - opr5 - opr6
-        return found_determinant
-
     a1: list = bypass_list(a1)
     a2: list = bypass_list(a2)
     a3: list = bypass_list(a3)
+    matrix = np.array([a1, a2, a3])
 
     determinant = []
-    determinant.append(finding_determinant(a1, a2, a3))
+    determinant.append(finding_determinant(matrix))
 
     for i in range(3):
         list1, list2, list3 = a1.copy(), a2.copy(), a3.copy()
@@ -82,8 +71,9 @@ def calc():
         list1[i] = list1[3]
         list2[i] = list2[3]
         list3[i] = list3[3]
+        matrix = np.array([list1, list2, list3])
 
-        determinant.append(finding_determinant(list1, list2, list3))
+        determinant.append(finding_determinant(matrix))
 
     if determinant[0] > 0 or determinant[0] < 0:
         x1 = determinant[1]/determinant[0]
@@ -187,7 +177,7 @@ filemenu = Menu(mainmenu, tearoff=0)
 filemenu.add_command(label="Открыть...")
 filemenu.add_command(label="Новый")
 filemenu.add_command(label="Сохранить...")
-filemenu.add_command(label="Выход")
+filemenu.add_command(label="Выход", command=window.quit)
 
 wiewmenu = Menu(mainmenu, tearoff=0)
 wiewmenu.add_command(label='Внешний вид')
