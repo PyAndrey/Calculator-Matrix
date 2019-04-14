@@ -1,4 +1,4 @@
-#-------------Version Alpha 1.1.7----------------#
+#-------------Version Alpha 1.1.11----------------#
 
 # imports
 from copy import copy
