@@ -1,10 +1,14 @@
-#-------------Version Alpha 1.1.11----------------#
+#-------------Version Alpha 1.1.13----------------#
 
 # imports
 from copy import copy
 from tkinter import *
-from find_determinant import *
+from tkinter import filedialog as fd
+
 import numpy as np
+
+from determinant import *
+
 # Functions
 
 
@@ -23,6 +27,16 @@ def about_programm():
     out3.pack()
     out4 = Label(window, text="Яковлев Олег")
     out4.pack()
+
+
+def help_window():
+    window = Tk()
+    window.title("About programm")
+    window.geometry("510x260+700+400")
+    window.resizable(0, 0)
+    out1 = Label(
+        window, text="Вводите поочередно цифры\n в специальные формы, \nпотом нажмите 'Расчитать'.")
+    out1.pack()
 
 
 def calc():
@@ -105,20 +119,17 @@ window.resizable(0, 0)
 input1 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input1.grid(row=1, column=1)
 
-label1 = Label(window, text="* x1 +", width=10)
-label1.grid(row=1, column=2)
+label1 = Label(window, text="* x1 +", width=10).grid(row=1, column=2)
 
 input2 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input2.grid(row=1, column=3)
 
-label2 = Label(window, text="* x2 +")
-label2.grid(row=1, column=4)
+label2 = Label(window, text="* x2 +").grid(row=1, column=4)
 
 input3 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input3.grid(row=1, column=5)
 
-label3 = Label(window, text="* x3 =", width=10)
-label3.grid(row=1, column=6)
+label3 = Label(window, text="* x3 =", width=10).grid(row=1, column=6)
 
 input4 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input4.grid(row=1, column=7)
@@ -126,20 +137,17 @@ input4.grid(row=1, column=7)
 input5 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input5.grid(row=2, column=1)
 
-label4 = Label(window, text="* x1 +", width=10)
-label4.grid(row=2, column=2)
+label4 = Label(window, text="* x1 +", width=10).grid(row=2, column=2)
 
 input6 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input6.grid(row=2, column=3)
 
-label5 = Label(window, text="* x2 +")
-label5.grid(row=2, column=4)
+label5 = Label(window, text="* x2 +").grid(row=2, column=4)
 
 input7 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input7.grid(row=2, column=5)
 
-label6 = Label(window, text="* x3 =", width=10)
-label6.grid(row=2, column=6)
+label6 = Label(window, text="* x3 =", width=10).grid(row=2, column=6)
 
 input8 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input8.grid(row=2, column=7)
@@ -147,20 +155,17 @@ input8.grid(row=2, column=7)
 input9 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input9.grid(row=3, column=1)
 
-label7 = Label(window, text="* x1 +", width=10)
-label7.grid(row=3, column=2)
+label7 = Label(window, text="* x1 +", width=10).grid(row=3, column=2)
 
 input10 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input10.grid(row=3, column=3)
 
-label8 = Label(window, text="* x2 +")
-label8.grid(row=3, column=4)
+label8 = Label(window, text="* x2 +").grid(row=3, column=4)
 
 input11 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input11.grid(row=3, column=5)
 
-label8 = Label(window, text="* x3 =", width=10)
-label8.grid(row=3, column=6)
+label9 = Label(window, text="* x3 =", width=10).grid(row=3, column=6)
 
 input12 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input12.grid(row=3, column=7)
@@ -183,7 +188,7 @@ wiewmenu = Menu(mainmenu, tearoff=0)
 wiewmenu.add_command(label='Внешний вид')
 
 helpmenu = Menu(mainmenu, tearoff=0)
-helpmenu.add_command(label="Помощь")
+helpmenu.add_command(label="Помощь", command=help_window)
 helpmenu.add_command(label="О программе", command=about_programm)
 
 mainmenu.add_cascade(label="Файл", menu=filemenu)

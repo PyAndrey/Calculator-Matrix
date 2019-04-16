@@ -16,9 +16,7 @@ def insert_text():
 
 def extract_text():
     try:
-        file_name = fd.asksaveasfilename(filetypes=(("TXT files", "*.txt"),
-                                                    ("HTML files", "*.html; *.htm"),
-                                                    ("All files", "*.*")))
+        file_name = fd.asksaveasfilename(filetypes=(("TXT files", "*.txt"), ("All files", "*.*")))
         f = open(file_name, 'w')
         s = text.get(1.0, END)
         f.write(s)
@@ -40,8 +38,7 @@ mainmenu = Menu(root)
 root.config(menu=mainmenu)
 mainmenu.add_command(label="Открыть", command=insert_text)
 mainmenu.add_command(label="Сохранить", command=extract_text)
-menu = Menu(tearoff=0)
-menu.add_command(label="Очистить", command=delete_text)
+mainmenu.add_command(label="Очистить", command=delete_text)
 text.bind("<Button-3>", lambda event: menu.post(event.x_root, event.y_root))
 
 root.mainloop()
