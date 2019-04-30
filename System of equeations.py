@@ -1,8 +1,9 @@
-#-------------Version Alpha 1.1.13----------------#
+#-------------Version Alpha 1.1.31----------------#
 
 # imports
 from copy import copy
 from tkinter import *
+from tkinter import messagebox as box
 from tkinter import filedialog as fd
 
 import numpy as np
@@ -18,15 +19,10 @@ def about_programm():
     window.title("About programm")
     window.geometry("510x260+700+400")
     window.resizable(0, 0)
-    out1 = Label(
-        window, text="Программа для расчета систем уравнений с тремя переменными")
-    out1.pack()
-    out2 = Label(window, text="Авторы")
-    out2.pack()
-    out3 = Label(window, text="Юзвук Андрей")
-    out3.pack()
-    out4 = Label(window, text="Яковлев Олег")
-    out4.pack()
+    Label(window, text="Программа для расчета систем уравнений с тремя переменными").pack()
+    Label(window, text="Авторы").pack()
+    Label(window, text="Юзвук Андрей").pack()
+    Label(window, text="Яковлев Олег").pack()
 
 
 def help_window():
@@ -34,9 +30,7 @@ def help_window():
     window.title("About programm")
     window.geometry("510x260+700+400")
     window.resizable(0, 0)
-    out1 = Label(
-        window, text="Вводите поочередно цифры\n в специальные формы, \nпотом нажмите 'Расчитать'.")
-    out1.pack()
+    Label(window, text="Вводите поочередно цифры\n в специальные формы, \nпотом нажмите 'Расчитать'.").pack()
 
 
 def calc():
@@ -68,7 +62,7 @@ def calc():
             try:
                 list2.append(int(i))
             except ValueError:
-                box.showerror("Error", "Должны быть только цифры!")
+                box.showerror("Error","Должны быть только цифры!")
         return list2
 
     a1: list = bypass_list(a1)
@@ -94,18 +88,17 @@ def calc():
         x2 = determinant[2]/determinant[0]
         x3 = determinant[3]/determinant[0]
 
-        out1 = Label(window, text="x1 = " + str(x1))
-        out1.grid(row=5, column=2, columnspan=5, sticky="s")
-        out2 = Label(window, text="x2 = " + str(x2), width=50)
-        out2.grid(row=6, column=2, columnspan=5, sticky="s")
-        out3 = Label(window, text="x3 = " + str(x3))
-        out3.grid(row=7, column=2, columnspan=5, sticky="s")
+        Label(window, text="x1 = " + str(x1)).grid(row=5,
+                                                   column=2, columnspan=5, sticky="s")
+        Label(window, text="x2 = " + str(x2), width=50).grid(row=6,
+                                                             column=2, columnspan=5, sticky="s")
+        Label(window, text="x3 = " + str(x3)).grid(row=7,
+                                                   column=2, columnspan=5, sticky="s")
     else:
         answer = Tk()
         answer.title("Answers")
         answer.resizable(0, 0)
-        out1 = Label(answer, text=determinant, width=150)
-        out1.pack()
+        Label(answer, text=determinant, width=150).pack()
 
 
 # Window creating
@@ -115,21 +108,26 @@ window.eval('tk::PlaceWindow %s center' %
 window.title("System of equeations")
 window.geometry("510x280")
 window.resizable(0, 0)
+
+Label(window, text="* x1 +", width=10).grid(row=1, column=2)
+Label(window, text="* x2 +").grid(row=1, column=4)
+Label(window, text="* x3 =", width=10).grid(row=1, column=6)
+Label(window, text="* x1 +", width=10).grid(row=2, column=2)
+Label(window, text="* x2 +").grid(row=2, column=4)
+Label(window, text="* x3 =", width=10).grid(row=2, column=6)
+Label(window, text="* x1 +", width=10).grid(row=3, column=2)
+Label(window, text="* x2 +").grid(row=3, column=4)
+Label(window, text="* x3 =", width=10).grid(row=3, column=6)
+
 # Inputs string
 input1 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input1.grid(row=1, column=1)
 
-label1 = Label(window, text="* x1 +", width=10).grid(row=1, column=2)
-
 input2 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input2.grid(row=1, column=3)
 
-label2 = Label(window, text="* x2 +").grid(row=1, column=4)
-
 input3 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input3.grid(row=1, column=5)
-
-label3 = Label(window, text="* x3 =", width=10).grid(row=1, column=6)
 
 input4 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input4.grid(row=1, column=7)
@@ -137,17 +135,11 @@ input4.grid(row=1, column=7)
 input5 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input5.grid(row=2, column=1)
 
-label4 = Label(window, text="* x1 +", width=10).grid(row=2, column=2)
-
 input6 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input6.grid(row=2, column=3)
 
-label5 = Label(window, text="* x2 +").grid(row=2, column=4)
-
 input7 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input7.grid(row=2, column=5)
-
-label6 = Label(window, text="* x3 =", width=10).grid(row=2, column=6)
 
 input8 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input8.grid(row=2, column=7)
@@ -155,24 +147,17 @@ input8.grid(row=2, column=7)
 input9 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input9.grid(row=3, column=1)
 
-label7 = Label(window, text="* x1 +", width=10).grid(row=3, column=2)
-
 input10 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input10.grid(row=3, column=3)
 
-label8 = Label(window, text="* x2 +").grid(row=3, column=4)
-
 input11 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input11.grid(row=3, column=5)
-
-label9 = Label(window, text="* x3 =", width=10).grid(row=3, column=6)
 
 input12 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input12.grid(row=3, column=7)
 
 # calc button
-calc_button = Button(window, text="Расчитать", command=calc)
-calc_button.grid(row=4, column=4, sticky=S)
+Button(window, text="Расчитать", command=calc).grid(row=4, column=4, sticky=S)
 
 # Добавляет меню вверху программы
 mainmenu = Menu(window)
