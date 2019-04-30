@@ -10,8 +10,8 @@ import numpy as np
 
 from determinant import *
 
-# Functions
 
+# Functions
 
 def about_programm():
     """About_the_programm"""
