@@ -1,17 +1,14 @@
 #-------------Version Alpha 1.2----------------#
 
-# imports
 from copy import copy
 from tkinter import *
-from tkinter import messagebox as box
 from tkinter import filedialog as fd
+from tkinter import messagebox as box
 
 import numpy as np
 
 from determinant import *
 
-
-# Functions
 
 def about_programm():
     """About_the_programm"""
@@ -27,20 +24,20 @@ def about_programm():
 
 def help_window():
     window = Tk()
-    window.title("About programm")
+    window.title("Help programm")
     window.geometry("510x260+700+400")
     window.resizable(0, 0)
     Label(window, text="Вводите поочередно цифры\n в специальные формы, \nпотом нажмите 'Расчитать'.").pack()
 
 
-""" Matrix solving by Kramer method"""
 def bypass_list(list1: list) -> list:
+    """ Matrix solving by Kramer method"""
     list2 = []
     for i in list1:
         try:
             list2.append(int(i))
         except ValueError:
-            box.showerror("Error","Должны быть только цифры!")
+            box.showerror("Error", "Должны быть только цифры!")
             raise ValueError
     return list2
 
@@ -73,7 +70,7 @@ def calc():
         a3: list = bypass_list(a3)
     except ValueError:
         return
-    
+
     matrix = np.array([a1, a2, a3])
 
     determinant = []
@@ -116,13 +113,13 @@ window.geometry("510x280")
 window.resizable(0, 0)
 
 Label(window, text="* x1 +", width=10).grid(row=1, column=2)
-Label(window, text="* x2 +").grid(row=1, column=4)
-Label(window, text="* x3 =", width=10).grid(row=1, column=6)
 Label(window, text="* x1 +", width=10).grid(row=2, column=2)
-Label(window, text="* x2 +").grid(row=2, column=4)
-Label(window, text="* x3 =", width=10).grid(row=2, column=6)
 Label(window, text="* x1 +", width=10).grid(row=3, column=2)
+Label(window, text="* x2 +").grid(row=1, column=4)
+Label(window, text="* x2 +").grid(row=2, column=4)
 Label(window, text="* x2 +").grid(row=3, column=4)
+Label(window, text="* x3 =", width=10).grid(row=1, column=6)
+Label(window, text="* x3 =", width=10).grid(row=2, column=6)
 Label(window, text="* x3 =", width=10).grid(row=3, column=6)
 
 # Inputs string
