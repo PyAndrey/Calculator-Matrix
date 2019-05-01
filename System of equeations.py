@@ -1,4 +1,4 @@
-#-------------Version Alpha 1.1.31----------------#
+#-------------Version Alpha 1.2----------------#
 
 # imports
 from copy import copy
@@ -33,6 +33,18 @@ def help_window():
     Label(window, text="Вводите поочередно цифры\n в специальные формы, \nпотом нажмите 'Расчитать'.").pack()
 
 
+""" Matrix solving by Kramer method"""
+def bypass_list(list1: list) -> list:
+    list2 = []
+    for i in list1:
+        try:
+            list2.append(int(i))
+        except ValueError:
+            box.showerror("Error","Должны быть только цифры!")
+            raise ValueError
+    return list2
+
+
 def calc():
     """Calculation"""
     s1 = input1.get()
@@ -55,19 +67,13 @@ def calc():
     a3 = []
     a3.extend([s9, s10, s11, s12])
     #--------------------------#
-    """ Matrix solving by Kramer method"""
-    def bypass_list(list1: list) -> list:
-        list2 = []
-        for i in list1:
-            try:
-                list2.append(int(i))
-            except ValueError:
-                box.showerror("Error","Должны быть только цифры!")
-        return list2
-
-    a1: list = bypass_list(a1)
-    a2: list = bypass_list(a2)
-    a3: list = bypass_list(a3)
+    try:
+        a1: list = bypass_list(a1)
+        a2: list = bypass_list(a2)
+        a3: list = bypass_list(a3)
+    except ValueError:
+        return
+    
     matrix = np.array([a1, a2, a3])
 
     determinant = []
