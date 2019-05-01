@@ -42,7 +42,7 @@ def bypass_list(list1: list) -> list:
     return list2
 
 
-def calc():
+def calculate():
     """Calculation"""
     s1 = input1.get()
     s2 = input2.get()
@@ -160,7 +160,8 @@ input12 = Entry(window, justify=CENTER, width=10, borderwidth=5)
 input12.grid(row=3, column=7)
 
 # calc button
-Button(window, text="Расчитать", command=calc).grid(row=4, column=4, sticky=S)
+Button(window, text="Расчитать", command=calculate).grid(
+    row=4, column=4, sticky=S)
 
 # Добавляет меню вверху программы
 mainmenu = Menu(window)
