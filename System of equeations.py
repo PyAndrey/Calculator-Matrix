@@ -7,7 +7,7 @@ from tkinter import messagebox as box
 
 import numpy as np
 
-from determinant import *
+from matrix import matrix_determinant_three_order
 
 
 def about_programm():
@@ -74,7 +74,7 @@ def calculate():
     matrix = np.array([a1, a2, a3])
 
     determinant = []
-    determinant.append(finding_determinant(matrix))
+    determinant.append(matrix_determinant_three_order(matrix))
 
     for i in range(3):
         list1, list2, list3 = a1.copy(), a2.copy(), a3.copy()
@@ -84,7 +84,7 @@ def calculate():
         list3[i] = list3[3]
         matrix = np.array([list1, list2, list3])
 
-        determinant.append(finding_determinant(matrix))
+        determinant.append(matrix_determinant_three_order(matrix))
 
     if determinant[0] > 0 or determinant[0] < 0:
         x1 = determinant[1]/determinant[0]
