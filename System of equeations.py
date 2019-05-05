@@ -7,7 +7,8 @@ from tkinter import messagebox as box
 
 import numpy as np
 
-from matrix import matrix_determinant_three_order, matrix_determinant_second_order
+from matrix import (matrix_determinant_second_order,
+                    matrix_determinant_three_order)
 
 
 def about_programm():
