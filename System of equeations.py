@@ -1,4 +1,4 @@
-#-------------Version Alpha 1.2----------------#
+#-------------Version Alpha 1.3----------------#
 
 from copy import copy
 from tkinter import *
@@ -7,11 +7,10 @@ from tkinter import messagebox as box
 
 import numpy as np
 
-from matrix import matrix_determinant_three_order
+from matrix import matrix_determinant_three_order, matrix_determinant_second_order
 
 
 def about_programm():
-    """About_the_programm"""
     window = Tk()
     window.title("About programm")
     window.geometry("510x260+700+400")
@@ -31,7 +30,7 @@ def help_window():
 
 
 def bypass_list(list1: list) -> list:
-    """ Matrix solving by Kramer method"""
+    """Преобразует элементы в int"""
     list2 = []
     for i in list1:
         try:
@@ -42,8 +41,89 @@ def bypass_list(list1: list) -> list:
     return list2
 
 
-def calculate():
-    """Calculation"""
+def clear_grid():
+    """Очищает окно от grid"""
+    list = window.grid_slaves()
+    for l in list:
+        l.destroy()
+
+
+def clear_place():
+    """Очищает окно от place"""
+    list = window.place_slaves()
+    for l in list:
+        l.destroy()
+
+
+def calculate_matrix_second_order():
+    """Calculation matrix"""
+    s1 = input13.get()
+    s2 = input14.get()
+    s3 = input15.get()
+    s4 = input16.get()
+    #-------------------------#
+    a1 = []
+    a1.extend([s1, s2])
+    a2 = []
+    a2.extend([s3, s4])
+    #--------------------------#
+    try:
+        a1: list = bypass_list(a1)
+        a2: list = bypass_list(a2)
+    except ValueError:
+        return
+
+    matrix = np.array([a1, a2])
+
+    m = matrix_determinant_second_order(matrix)
+
+    if m != None:
+        Label(window, text=m).place(relx=.75, rely=0.05, anchor="n",
+                                      relheight=.1, relwidth=.1, bordermode=INSIDE)
+
+
+def matrix():
+    """Поля для ввода чисел матрицы"""
+    clear_grid()
+
+    Label(window, text="|").place(relx=.43, rely=0.0, anchor="n",
+                                  relheight=.1, relwidth=.1, bordermode=INSIDE)
+    Label(window, text="|").place(relx=.43, rely=0.1, anchor="n",
+                                  relheight=.1, relwidth=.1, bordermode=INSIDE)
+    Label(window, text="|").place(relx=.66, rely=0.0, anchor="n",
+                                  relheight=.1, relwidth=.1, bordermode=INSIDE)
+    Label(window, text="|").place(relx=.66, rely=0.1, anchor="n",
+                                  relheight=.1, relwidth=.1, bordermode=INSIDE)
+
+    Label(window, text="=").place(relx=.69, rely=0.05, anchor="n",
+                                  relheight=.1, relwidth=.05, bordermode=INSIDE)
+
+    global input13 
+    input13 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input13.place(relx=.5, rely=0.0, anchor="n", relheight=.1,
+                 relwidth=.1, bordermode=INSIDE)
+
+    global input14
+    input14 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input14.place(relx=.6, rely=0.0, anchor="n", relheight=.1,
+                 relwidth=.1, bordermode=INSIDE)
+
+    global input15
+    input15 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input15.place(relx=.5, rely=0.1, anchor="n", relheight=.1,
+                 relwidth=.1, bordermode=INSIDE)
+
+    global input16
+    input16 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input16.place(relx=.6, rely=0.1, anchor="n", relheight=.1,
+                 relwidth=.1, bordermode=INSIDE)
+
+    Button(window, text="Расчитать", command=calculate_matrix_second_order).place(
+        relx=.55, rely=0.3, anchor="n", relheight=.15, relwidth=.2, bordermode=OUTSIDE)
+
+
+def calculation_equetions():
+    """Calculation equetions"""
     s1 = input1.get()
     s2 = input2.get()
     s3 = input3.get()
@@ -104,6 +184,74 @@ def calculate():
         Label(answer, text=determinant, width=150).pack()
 
 
+def equation():
+    """Поля для ввода чисел уравнений"""
+    clear_place()
+
+    Label(window, text="* x1 +", width=10).grid(row=1, column=2)
+    Label(window, text="* x1 +", width=10).grid(row=2, column=2)
+    Label(window, text="* x1 +", width=10).grid(row=3, column=2)
+    Label(window, text="* x2 +").grid(row=1, column=4)
+    Label(window, text="* x2 +").grid(row=2, column=4)
+    Label(window, text="* x2 +").grid(row=3, column=4)
+    Label(window, text="* x3 =", width=10).grid(row=1, column=6)
+    Label(window, text="* x3 =", width=10).grid(row=2, column=6)
+    Label(window, text="* x3 =", width=10).grid(row=3, column=6)
+
+    # Inputs string
+    global input1
+    input1 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input1.grid(row=1, column=1)
+
+    global input2
+    input2 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input2.grid(row=1, column=3)
+
+    global input3
+    input3 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input3.grid(row=1, column=5)
+
+    global input4 
+    input4 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input4.grid(row=1, column=7)
+
+    global input5
+    input5 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input5.grid(row=2, column=1)
+
+    global input6
+    input6 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input6.grid(row=2, column=3)
+
+    global input7
+    input7 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input7.grid(row=2, column=5)
+
+    global input8
+    input8 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input8.grid(row=2, column=7)
+
+    global input9
+    input9 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input9.grid(row=3, column=1)
+
+    global input10
+    input10 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input10.grid(row=3, column=3)
+
+    global input11
+    input11 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input11.grid(row=3, column=5)
+
+    global input12
+    input12 = Entry(window, justify=CENTER, width=10, borderwidth=5)
+    input12.grid(row=3, column=7)
+
+    # calc button
+    Button(window, text="Расчитать", command=calculation_equetions).grid(
+        row=4, column=4, sticky=S)
+
+
 # Window creating
 window = Tk()
 window.eval('tk::PlaceWindow %s center' %
@@ -111,57 +259,7 @@ window.eval('tk::PlaceWindow %s center' %
 window.title("System of equeations")
 window.geometry("510x280")
 window.resizable(0, 0)
-
-Label(window, text="* x1 +", width=10).grid(row=1, column=2)
-Label(window, text="* x1 +", width=10).grid(row=2, column=2)
-Label(window, text="* x1 +", width=10).grid(row=3, column=2)
-Label(window, text="* x2 +").grid(row=1, column=4)
-Label(window, text="* x2 +").grid(row=2, column=4)
-Label(window, text="* x2 +").grid(row=3, column=4)
-Label(window, text="* x3 =", width=10).grid(row=1, column=6)
-Label(window, text="* x3 =", width=10).grid(row=2, column=6)
-Label(window, text="* x3 =", width=10).grid(row=3, column=6)
-
-# Inputs string
-input1 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input1.grid(row=1, column=1)
-
-input2 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input2.grid(row=1, column=3)
-
-input3 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input3.grid(row=1, column=5)
-
-input4 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input4.grid(row=1, column=7)
-
-input5 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input5.grid(row=2, column=1)
-
-input6 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input6.grid(row=2, column=3)
-
-input7 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input7.grid(row=2, column=5)
-
-input8 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input8.grid(row=2, column=7)
-
-input9 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input9.grid(row=3, column=1)
-
-input10 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input10.grid(row=3, column=3)
-
-input11 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input11.grid(row=3, column=5)
-
-input12 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-input12.grid(row=3, column=7)
-
-# calc button
-Button(window, text="Расчитать", command=calculate).grid(
-    row=4, column=4, sticky=S)
+equetion()
 
 # Добавляет меню вверху программы
 mainmenu = Menu(window)
@@ -174,14 +272,15 @@ filemenu.add_command(label="Сохранить...")
 filemenu.add_command(label="Выход", command=window.quit)
 
 wiewmenu = Menu(mainmenu, tearoff=0)
-wiewmenu.add_command(label='Внешний вид')
+wiewmenu.add_command(label='Режим матрицы', command=matrix)
+wiewmenu.add_command(label='Режим уравнения', command=equation)
 
 helpmenu = Menu(mainmenu, tearoff=0)
 helpmenu.add_command(label="Помощь", command=help_window)
 helpmenu.add_command(label="О программе", command=about_programm)
 
 mainmenu.add_cascade(label="Файл", menu=filemenu)
-mainmenu.add_cascade(label="Вид", menu=wiewmenu)
+mainmenu.add_cascade(label="Режим", menu=wiewmenu)
 mainmenu.add_cascade(label="Справка", menu=helpmenu)
 
 window.mainloop()

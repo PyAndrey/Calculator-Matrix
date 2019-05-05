@@ -38,7 +38,7 @@ def finding_determinant_four_order(matrix) -> int:
     matrix_2 = np.array([[matrix[1][0], matrix[1][2], matrix[1][3]],
                          [matrix[2][0], matrix[2][2], matrix[2][3]],
                          [matrix[3][0], matrix[3][2], matrix[3][3]]])
-    
+                         
     matrix_3 = np.array([[matrix[1][0], matrix[1][1], matrix[1][3]],
                          [matrix[2][0], matrix[2][1], matrix[2][3]],
                          [matrix[3][0], matrix[3][1], matrix[3][3]]])
@@ -47,5 +47,6 @@ def finding_determinant_four_order(matrix) -> int:
                          [matrix[2][0], matrix[2][1], matrix[2][2]],
                          [matrix[3][0], matrix[3][1], matrix[3][2]]])
 
-    found_determinant = a11 * matrix_determinant_three_order(matrix_1) - a12 * matrix_determinant_three_order(matrix_2) + a13 * matrix_determinant_three_order(matrix_3) - a14 * matrix_determinant_three_order(matrix_4)
+    found_determinant = a11 * matrix_determinant_three_order(matrix_1) - a12 * matrix_determinant_three_order(
+        matrix_2) + a13 * matrix_determinant_three_order(matrix_3) - a14 * matrix_determinant_three_order(matrix_4)
     return found_determinant
