@@ -16,7 +16,7 @@ def about_programm():
     window.title("About programm")
     window.geometry("510x260+700+400")
     window.resizable(0, 0)
-    Label(window, text="Программа для расчета систем уравнений с тремя переменными").pack()
+    Label(window, text="Программа для расчета систем уравнений с тремя переменными и матрицы").pack()
     Label(window, text="Авторы").pack()
     Label(window, text="Юзвук Андрей").pack()
     Label(window, text="Яковлев Олег").pack()
