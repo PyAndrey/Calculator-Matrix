@@ -88,7 +88,7 @@ def calculate_matrix_second_order():
             relx=.5, rely=.5, anchor="n", bordermode=INSIDE)
 
 
-def matrix():
+def matrix_2x2():
     """Поля для ввода чисел матрицы"""
     clear_grid()
 
@@ -278,7 +278,7 @@ filemenu.add_command(label="Сохранить...")
 filemenu.add_command(label="Выход", command=window.quit)
 
 wiewmenu = Menu(mainmenu, tearoff=0)
-wiewmenu.add_command(label='Режим матрицы', command=matrix)
+wiewmenu.add_command(label='Режим матрицы 2x2', command=matrix_2x2)
 wiewmenu.add_command(label='Режим уравнения', command=equation)
 
 helpmenu = Menu(mainmenu, tearoff=0)
