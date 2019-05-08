@@ -1,4 +1,4 @@
-#-------------Version Alpha 1.3----------------#
+#-------------Version Alpha 1.4----------------#
 
 from copy import copy
 from tkinter import *
@@ -8,7 +8,8 @@ from tkinter import messagebox as box
 import numpy as np
 
 from matrix import (matrix_determinant_second_order,
-                    matrix_determinant_three_order)
+                    matrix_determinant_three_order,
+                    matrix_determinant_second_order_in_label)
 
 
 def about_programm():
@@ -76,51 +77,55 @@ def calculate_matrix_second_order():
 
     matrix = np.array([a1, a2])
 
-    m = matrix_determinant_second_order(matrix)
+    el1, el2, el3, el4 = matrix_determinant_second_order_in_label(matrix)
 
-    if m != None:
-        Label(window, text=m).place(relx=.75, rely=0.05, anchor="n",
-                                      relheight=.1, relwidth=.1, bordermode=INSIDE)
+    res = matrix_determinant_second_order(matrix)
+
+    stroka = "= {0} * {3} - {1} * {2} = {4}".format(el1, el2, el3, el4, res)
+
+    if res != None:
+        Label(window, text=stroka).place(
+            relx=.5, rely=.5, anchor="n", bordermode=INSIDE)
 
 
 def matrix():
     """Поля для ввода чисел матрицы"""
     clear_grid()
 
-    Label(window, text="|").place(relx=.43, rely=0.0, anchor="n",
+    Label(window, text="|").place(relx=.37, rely=0.0, anchor="n",
                                   relheight=.1, relwidth=.1, bordermode=INSIDE)
-    Label(window, text="|").place(relx=.43, rely=0.1, anchor="n",
+    Label(window, text="|").place(relx=.37, rely=0.1, anchor="n",
                                   relheight=.1, relwidth=.1, bordermode=INSIDE)
-    Label(window, text="|").place(relx=.66, rely=0.0, anchor="n",
+    Label(window, text="|").place(relx=.63, rely=0.0, anchor="n",
                                   relheight=.1, relwidth=.1, bordermode=INSIDE)
-    Label(window, text="|").place(relx=.66, rely=0.1, anchor="n",
+    Label(window, text="|").place(relx=.63, rely=0.1, anchor="n",
                                   relheight=.1, relwidth=.1, bordermode=INSIDE)
 
-    Label(window, text="=").place(relx=.69, rely=0.05, anchor="n",
+    Label(window, text="=").place(relx=.66, rely=0.05, anchor="n",
                                   relheight=.1, relwidth=.05, bordermode=INSIDE)
 
-    global input13 
+    global input13
     input13 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input13.place(relx=.5, rely=0.0, anchor="n", relheight=.1,
-                 relwidth=.1, bordermode=INSIDE)
+    input13.place(relx=.45, rely=0.0, anchor="n", relheight=.1,
+                  relwidth=.1, bordermode=INSIDE)
 
     global input14
     input14 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input14.place(relx=.6, rely=0.0, anchor="n", relheight=.1,
-                 relwidth=.1, bordermode=INSIDE)
+    input14.place(relx=.55, rely=0.0, anchor="n", relheight=.1,
+                  relwidth=.1, bordermode=INSIDE)
 
     global input15
     input15 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input15.place(relx=.5, rely=0.1, anchor="n", relheight=.1,
-                 relwidth=.1, bordermode=INSIDE)
+    input15.place(relx=.45, rely=0.1, anchor="n", relheight=.1,
+                  relwidth=.1, bordermode=INSIDE)
 
     global input16
     input16 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input16.place(relx=.6, rely=0.1, anchor="n", relheight=.1,
-                 relwidth=.1, bordermode=INSIDE)
+    input16.place(relx=.55, rely=0.1, anchor="n", relheight=.1,
+                  relwidth=.1, bordermode=INSIDE)
 
     Button(window, text="Расчитать", command=calculate_matrix_second_order).place(
-        relx=.55, rely=0.3, anchor="n", relheight=.15, relwidth=.2, bordermode=OUTSIDE)
+        relx=.5, rely=0.25, anchor="n", relheight=.15, relwidth=.2, bordermode=OUTSIDE)
 
 
 def calculation_equetions():
@@ -212,7 +217,7 @@ def equation():
     input3 = Entry(window, justify=CENTER, width=10, borderwidth=5)
     input3.grid(row=1, column=5)
 
-    global input4 
+    global input4
     input4 = Entry(window, justify=CENTER, width=10, borderwidth=5)
     input4.grid(row=1, column=7)
 
@@ -260,7 +265,7 @@ window.eval('tk::PlaceWindow %s center' %
 window.title("System of equeations")
 window.geometry("510x280")
 window.resizable(0, 0)
-equetion()
+equation()
 
 # Добавляет меню вверху программы
 mainmenu = Menu(window)
