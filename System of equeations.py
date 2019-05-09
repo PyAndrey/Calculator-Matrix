@@ -9,8 +9,8 @@ import numpy as np
 
 from about_programm import *
 from clear_function import *
-from matrix import (matrix_determinant_second_order,
-                    matrix_determinant_second_order_in_label,
+from matrix import (matrix_determinant_2x2,
+                    matrix_determinant_2x2_in_label,
                     matrix_determinant_three_order)
 
 
