@@ -1,14 +1,14 @@
 import numpy as np
 
 
-def matrix_determinant_second_order(matrix) -> int:
+def matrix_determinant_2x2(matrix) -> int:
     opr1 = matrix[0][0]*matrix[1][1]
     opr2 = matrix[0][1]*matrix[1][0]
     found_determinant = opr1 - opr2
     return found_determinant
 
 
-def matrix_determinant_second_order_in_label(matrix) ->int:
+def matrix_determinant_2x2_in_label(matrix) ->int:
     el1 = matrix[0][0]
     el2 = matrix[0][1]
     el3 = matrix[1][0]

@@ -1,4 +1,4 @@
-#-------------Version Alpha 1.4----------------#
+#-------------Version Alpha 1.5----------------#
 
 from copy import copy
 from tkinter import *
@@ -7,28 +7,11 @@ from tkinter import messagebox as box
 
 import numpy as np
 
+from about_programm import *
+from clear_function import *
 from matrix import (matrix_determinant_second_order,
-                    matrix_determinant_three_order,
-                    matrix_determinant_second_order_in_label)
-
-
-def about_programm():
-    window = Tk()
-    window.title("About programm")
-    window.geometry("510x260+700+400")
-    window.resizable(0, 0)
-    Label(window, text="Программа для расчета систем уравнений с тремя переменными и матрицы").pack()
-    Label(window, text="Авторы").pack()
-    Label(window, text="Юзвук Андрей").pack()
-    Label(window, text="Яковлев Олег").pack()
-
-
-def help_window():
-    window = Tk()
-    window.title("Help programm")
-    window.geometry("510x260+700+400")
-    window.resizable(0, 0)
-    Label(window, text="Вводите поочередно цифры\n в специальные формы, \nпотом нажмите 'Расчитать'.").pack()
+                    matrix_determinant_second_order_in_label,
+                    matrix_determinant_three_order)
 
 
 def bypass_list(list1: list) -> list:
@@ -43,21 +26,7 @@ def bypass_list(list1: list) -> list:
     return list2
 
 
-def clear_grid():
-    """Очищает окно от grid"""
-    list = window.grid_slaves()
-    for l in list:
-        l.destroy()
-
-
-def clear_place():
-    """Очищает окно от place"""
-    list = window.place_slaves()
-    for l in list:
-        l.destroy()
-
-
-def calculate_matrix_second_order():
+def calculate_matrix_2x2():
     """Calculation matrix"""
     s1 = input13.get()
     s2 = input14.get()
@@ -77,9 +46,9 @@ def calculate_matrix_second_order():
 
     matrix = np.array([a1, a2])
 
-    el1, el2, el3, el4 = matrix_determinant_second_order_in_label(matrix)
+    el1, el2, el3, el4 = matrix_determinant_2x2_in_label(matrix)
 
-    res = matrix_determinant_second_order(matrix)
+    res = matrix_determinant_2x2(matrix)
 
     stroka = "= {0} * {3} - {1} * {2} = {4}".format(el1, el2, el3, el4, res)
 
@@ -90,7 +59,7 @@ def calculate_matrix_second_order():
 
 def matrix_2x2():
     """Поля для ввода чисел матрицы"""
-    clear_grid()
+    clear_grid(window)
 
     Label(window, text="|").place(relx=.37, rely=0.0, anchor="n",
                                   relheight=.1, relwidth=.1, bordermode=INSIDE)
@@ -124,7 +93,7 @@ def matrix_2x2():
     input16.place(relx=.55, rely=0.1, anchor="n", relheight=.1,
                   relwidth=.1, bordermode=INSIDE)
 
-    Button(window, text="Расчитать", command=calculate_matrix_second_order).place(
+    Button(window, text="Расчитать", command=calculate_matrix_2x2).place(
         relx=.5, rely=0.25, anchor="n", relheight=.15, relwidth=.2, bordermode=OUTSIDE)
 
 
@@ -192,7 +161,7 @@ def calculation_equetions():
 
 def equation():
     """Поля для ввода чисел уравнений"""
-    clear_place()
+    clear_place(window)
 
     Label(window, text="* x1 +", width=10).grid(row=1, column=2)
     Label(window, text="* x1 +", width=10).grid(row=2, column=2)
