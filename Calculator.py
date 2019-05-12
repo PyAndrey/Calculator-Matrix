@@ -1,4 +1,4 @@
-#-------------Version Alpha 1.5----------------#
+#-------------Version Alpha 1.6----------------#
 
 from copy import copy
 from tkinter import *
@@ -14,16 +14,16 @@ from matrix import (matrix_determinant_2x2,
                     matrix_determinant_three_order)
 
 
-def bypass_list(list1: list) -> list:
+def bypass_list(list: list) -> list:
     """Преобразует элементы в int"""
-    list2 = []
-    for i in list1:
+    list1 = []
+    for i in list:
         try:
-            list2.append(int(i))
+            list1.append(int(i))
         except ValueError:
             box.showerror("Error", "Должны быть только цифры!")
             raise ValueError
-    return list2
+    return list1
 
 
 def calculate_matrix_2x2():
@@ -52,7 +52,7 @@ def calculate_matrix_2x2():
 
     stroka = "= {0} * {3} - {1} * {2} = {4}".format(el1, el2, el3, el4, res)
 
-    if res != None:
+    if res is not None:
         Label(window, text=stroka).place(
             relx=.5, rely=.5, anchor="n", bordermode=INSIDE)
 
@@ -75,12 +75,12 @@ def matrix_2x2():
 
     global input13
     input13 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input13.place(relx=.45, rely=0.0, anchor="n", relheight=.1,
+    input13.place(relx=.45, anchor="n", relheight=.1,
                   relwidth=.1, bordermode=INSIDE)
 
     global input14
     input14 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input14.place(relx=.55, rely=0.0, anchor="n", relheight=.1,
+    input14.place(relx=.55, anchor="n", relheight=.1,
                   relwidth=.1, bordermode=INSIDE)
 
     global input15
@@ -97,34 +97,22 @@ def matrix_2x2():
         relx=.5, rely=0.25, anchor="n", relheight=.15, relwidth=.2, bordermode=OUTSIDE)
 
 
-def get_data():
-    """Получает данные строк и сохраняет в переменные"""
-    s1 = input1.get()
-    s2 = input2.get()
-    s3 = input3.get()
-    s4 = input4.get()
-    s5 = input5.get()
-    s6 = input6.get()
-    s7 = input7.get()
-    s8 = input8.get()
-    s9 = input9.get()
-    s10 = input10.get()
-    s11 = input11.get()
-    s12 = input12.get()
-    return s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12
+def get_data(list: list) -> list:
+    """Получает данные строк и сохраняет в список."""
+    list = [input.get() for input in list]
+    return list
 
 
 def calculation_equetions():
     """Calculation equetions"""
-    get_data()
+    list = get_data(inputs)
     #-------------------------#
     a1 = []
-    a1.extend([s1, s2, s3, s4])
+    a1.extend([list[0], list[1], list[2], list[3]])
     a2 = []
-    a2.extend([s5, s6, s7, s8])
+    a2.extend([list[4], list[5], list[6], list[7]])
     a3 = []
-    a3.extend([s9, s10, s11, s12])
-    #--------------------------#
+    a3.extend([list[8], list[9], list[10], list[11]])
     try:
         a1: list = bypass_list(a1)
         a2: list = bypass_list(a2)
@@ -159,10 +147,7 @@ def calculation_equetions():
         Label(window, text="x3 = " + str(x3)).grid(row=7,
                                                    column=2, columnspan=5, sticky="s")
     else:
-        answer = Tk()
-        answer.title("Answers")
-        answer.resizable(0, 0)
-        Label(answer, text=determinant, width=150).pack()
+        Label(window, text="Определитель равен 0").grid(row=5, column=2, columnspan=5, sticky="s")
 
 
 def equation():
@@ -180,53 +165,13 @@ def equation():
     Label(window, text="* x3 =", width=10).grid(row=3, column=6)
 
     # Inputs string
-    global input1
-    input1 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input1.grid(row=1, column=1)
-
-    global input2
-    input2 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input2.grid(row=1, column=3)
-
-    global input3
-    input3 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input3.grid(row=1, column=5)
-
-    global input4
-    input4 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input4.grid(row=1, column=7)
-
-    global input5
-    input5 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input5.grid(row=2, column=1)
-
-    global input6
-    input6 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input6.grid(row=2, column=3)
-
-    global input7
-    input7 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input7.grid(row=2, column=5)
-
-    global input8
-    input8 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input8.grid(row=2, column=7)
-
-    global input9
-    input9 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input9.grid(row=3, column=1)
-
-    global input10
-    input10 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input10.grid(row=3, column=3)
-
-    global input11
-    input11 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input11.grid(row=3, column=5)
-
-    global input12
-    input12 = Entry(window, justify=CENTER, width=10, borderwidth=5)
-    input12.grid(row=3, column=7)
+    global inputs
+    inputs = []
+    for x in range(1, 4):
+        for j in range(1, 9, 2):
+            input = Entry(window, justify=CENTER, width=10, borderwidth=5)
+            input.grid(row=x, column=j)
+            inputs.append(input)
 
     # calc button
     Button(window, text="Расчитать", command=calculation_equetions).grid(
@@ -240,7 +185,7 @@ window.eval('tk::PlaceWindow %s center' %
 window.title("System of equeations")
 window.geometry("510x280")
 window.resizable(0, 0)
-equation()
+matrix_2x2()
 
 # Добавляет меню вверху программы
 mainmenu = Menu(window)
