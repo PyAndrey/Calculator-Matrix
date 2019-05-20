@@ -8,7 +8,7 @@ def matrix_determinant_2x2(matrix) -> int:
     return found_determinant
 
 
-def matrix_determinant_2x2_in_label(matrix) ->int:
+def matrix_determinant_2x2_in_label(matrix) -> int:
     el1 = matrix[0][0]
     el2 = matrix[0][1]
     el3 = matrix[1][0]
@@ -16,7 +16,7 @@ def matrix_determinant_2x2_in_label(matrix) ->int:
     return el1, el2, el3, el4
 
 
-def matrix_determinant_three_order(matrix) -> int:
+def matrix_3x3(matrix) -> int:
     opr1 = matrix[0][0]*matrix[1][1]*matrix[2][2]
     opr2 = matrix[0][1]*matrix[1][2]*matrix[2][0]
     opr3 = matrix[0][2]*matrix[1][0]*matrix[2][1]
@@ -46,7 +46,7 @@ def finding_determinant_four_order(matrix) -> int:
     matrix_2 = np.array([[matrix[1][0], matrix[1][2], matrix[1][3]],
                          [matrix[2][0], matrix[2][2], matrix[2][3]],
                          [matrix[3][0], matrix[3][2], matrix[3][3]]])
-                         
+
     matrix_3 = np.array([[matrix[1][0], matrix[1][1], matrix[1][3]],
                          [matrix[2][0], matrix[2][1], matrix[2][3]],
                          [matrix[3][0], matrix[3][1], matrix[3][3]]])
@@ -55,6 +55,8 @@ def finding_determinant_four_order(matrix) -> int:
                          [matrix[2][0], matrix[2][1], matrix[2][2]],
                          [matrix[3][0], matrix[3][1], matrix[3][2]]])
 
-    found_determinant = a11 * matrix_determinant_three_order(matrix_1) - a12 * matrix_determinant_three_order(
-        matrix_2) + a13 * matrix_determinant_three_order(matrix_3) - a14 * matrix_determinant_three_order(matrix_4)
+    found_determinant = a11*matrix_3x3(matrix_1) - 
+                        a12*matrix_3x3(matrix_2) + 
+                        a13*matrix_3x3(matrix_3) - 
+                        a14*matrix_3x3(matrix_4)
     return found_determinant
