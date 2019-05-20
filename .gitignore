@@ -1,5 +1,6 @@
 /__pycache__/*
 /.vscode
-about_programm.py
-clear_function.py
-main2.py
+.*
+!main.py
+!calculate.py
+!calculate_2x2.py
