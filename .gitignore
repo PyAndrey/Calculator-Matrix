@@ -1,6 +1,3 @@
 /__pycache__/*
 /.vscode
-.*
-!.main.py
-!.calculate.py
-!.calculate_2x2.py
+
