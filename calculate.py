@@ -211,8 +211,11 @@ class Ui_MainWindow(object):
         self.action_2x2.setObjectName("action_2x2")
         self.action = QtWidgets.QAction(MainWindow)
         self.action.setObjectName("action")
+        self.action_3x3 = QtWidgets.QAction(MainWindow)
+        self.action_3x3.setObjectName("action_3x3")
         self.menu.addAction(self.action_2x2)
         self.menu.addAction(self.action)
+        self.menu.addAction(self.action_3x3)
         self.menubar.addAction(self.menu.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -235,7 +238,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "* x3 +"))
         self.lineEdit_6.setText(_translate("MainWindow", "6"))
         self.label_2.setText(_translate("MainWindow", "* x2 +"))
-        self.label_3.setText(_translate("MainWindow", "* x1 +"))
+        self.label_3.setText(_translate("MainWindow", " * x1 +"))
         self.label_6.setText(_translate("MainWindow", "* x3 +"))
         self.label_4.setText(_translate("MainWindow", "* x1 +"))
         self.label_5.setText(_translate("MainWindow", "* x2 +"))
@@ -253,6 +256,7 @@ class Ui_MainWindow(object):
         self.menu.setTitle(_translate("MainWindow", "Режим"))
         self.action_2x2.setText(_translate("MainWindow", "Режим матрицы 2x2"))
         self.action.setText(_translate("MainWindow", "Режим уравнения"))
+        self.action_3x3.setText(_translate("MainWindow", "Режим матрицы 3x3"))
 
 
 if __name__ == "__main__":
