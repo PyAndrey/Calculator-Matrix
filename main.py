@@ -5,10 +5,7 @@ import sys
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from matrix import (matrix_3x3,
-                    matrix_determinant_2x2,
-                    matrix_determinant_2x2_in_label)
-from calculate_2x2 import Ui_MainWindow as Ui_MainWindow_2x2
+from matrix import matrix_3x3
 from calculate_3x3 import Ui_MainWindow as Ui_MainWindow_3x3
 from calculate import Ui_MainWindow
 
@@ -42,7 +39,6 @@ class WindowMatrix3x3():
 
     def pressed_button(self):
         self.ui_3x3.action.triggered.connect(WindowEquation)
-        self.ui_3x3.action_2x2.triggered.connect(WindowMatrix2x2)
 
     def calculate(self):
         lineedits = {"lineedit_1": self.ui_3x3.lineEdit_1,
@@ -55,56 +51,19 @@ class WindowMatrix3x3():
                      "lineedit_8": self.ui_3x3.lineEdit_8,
                      "lineedit_9": self.ui_3x3.lineEdit_9}
 
+        # Преобразует в строку value, потом в число.
         list = bypass_list([value.text() for name, value in lineedits.items()])
 
-        a1 = list[:3]
-        a2 = list[3:6]
-        a3 = list[6:10]
+        a1 = list[:3] # Строка верхняя
+        a2 = list[3:6] # Строка посередине
+        a3 = list[6:10] # Строка нижняя
 
-        matrix = np.array([a1, a2, a3])
+        matrix = np.array([a1, a2, a3]) # Многоуровневый список
 
-        res = matrix_determinant_2x2(matrix)
+        res = matrix_determinant_2x2(matrix) # Расчет результата
 
         if res is not None:
             self.ui_3x3.label_3.setText(str(res))
-
-
-class WindowMatrix2x2():
-    """Создает окно калькулятора."""
-
-    def __init__(self):
-        self.ui_2x2 = Ui_MainWindow_2x2()
-        self.ui_2x2.setupUi(MainWindow)
-        self.pressed_button()
-        self.ui_2x2.pushButton.clicked.connect(self.calculate)
-        MainWindow.show()
-
-    def pressed_button(self):
-        self.ui_2x2.action.triggered.connect(WindowEquation)
-        self.ui_2x2.action_3x3.triggered.connect(WindowMatrix3x3)
-
-    def calculate(self):
-        lineedits = {"lineedit_1": self.ui_2x2.lineEdit_1,
-                     "lineedit_2": self.ui_2x2.lineEdit_2,
-                     "lineedit_3": self.ui_2x2.lineEdit_3,
-                     "lineedit_4": self.ui_2x2.lineEdit_4}
-
-        list = bypass_list([value.text() for name, value in lineedits.items()])
-
-        a1 = list[:2]
-        a2 = list[2:4]
-
-        matrix = np.array([a1, a2, a3])
-
-        res = matrix_3x3(matrix)
-
-        el1, el2, el3, el4 = matrix_determinant_2x2_in_label(matrix)
-
-        stroka = "= {0} * {3} - {1} * {2} = {4}".format(
-            el1, el2, el3, el4, res)
-
-        if res is not None:
-            self.ui_2x2.label_3.setText(stroka)
 
 
 class WindowEquation():
@@ -118,7 +77,6 @@ class WindowEquation():
         MainWindow.show()
 
     def pressed_button(self):
-        self.ui.action_2x2.triggered.connect(WindowMatrix2x2)
         self.ui.action_3x3.triggered.connect(WindowMatrix3x3)
 
     def calculate(self):
@@ -134,28 +92,30 @@ class WindowEquation():
                      "lineEdit_10": self.ui.lineEdit_10,
                      "lineEdit_11": self.ui.lineEdit_11,
                      "lineEdit_12": self.ui.lineEdit_12}
-
+        # Преобразует в строку value, потом в число.
         list = bypass_list([value.text() for name, value in lineedits.items()])
 
-        a1 = list[:4]
-        a2 = list[4:8]
-        a3 = list[8:12]
+        a1 = list[:4] # Строка верхняя
+        a2 = list[4:8] # Строка посередине
+        a3 = list[8:12] # Строка нижняя
 
-        matrix = np.array([a1, a2, a3])
+        matrix = np.array([a1, a2, a3]) # Многоуровневый список
 
         determinant = []
-        determinant.append(matrix_3x3(matrix))
+        determinant.append(matrix_3x3(matrix)) # Записывается результат матрицы
 
         for i in range(3):
-            list1, list2, list3 = a1.copy(), a2.copy(), a3.copy()
-
+            list1, list2, list3 = a1.copy(), a2.copy(), a3.copy() # Копируются строки
+            # Идет замена каждого элемента для расчетов.
             list1[i] = list1[3]
             list2[i] = list2[3]
             list3[i] = list3[3]
-            matrix = np.array([list1, list2, list3])
 
-            determinant.append(matrix_3x3(matrix))
+            matrix = np.array([list1, list2, list3]) # Многоуровневый список
 
+            determinant.append(matrix_3x3(matrix)) # Записывается результат матриц
+
+        # Сравнение и вычисление x1, x2, x3
         if determinant[0] > 0 or determinant[0] < 0:
             x1 = determinant[1]/determinant[0]
             x2 = determinant[2]/determinant[0]
