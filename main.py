@@ -1,18 +1,15 @@
 # -------------Version Alpha 2.6----------------#
-
 import sys
 
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from matrix import matrix_3x3
-from calculate_3x3 import Ui_MainWindow as Ui_MainWindow_3x3
 from calculate import Ui_MainWindow
+from calculate_3x3 import Ui_MainWindow as Ui_MainWindow_3x3
+from matrix import matrix_3x3
 
-# Create application
 app = QtWidgets.QApplication(sys.argv)
 
-# Create form and init UI
 MainWindow = QtWidgets.QMainWindow()
 
 
@@ -33,11 +30,8 @@ class WindowMatrix3x3():
     def __init__(self):
         self.ui_3x3 = Ui_MainWindow_3x3()
         self.ui_3x3.setupUi(MainWindow)
-        self.pressed_button()
-        self.ui_3x3.pushButton.clicked.connect(self.calculate)
         MainWindow.show()
-
-    def pressed_button(self):
+        self.ui_3x3.pushButton.clicked.connect(self.calculate)
         self.ui_3x3.action.triggered.connect(WindowEquation)
 
     def calculate(self):
@@ -54,16 +48,16 @@ class WindowMatrix3x3():
         # Преобразует в строку value, потом в число.
         list = bypass_list([value.text() for name, value in lineedits.items()])
 
-        a1 = list[:3] # Строка верхняя
-        a2 = list[3:6] # Строка посередине
-        a3 = list[6:10] # Строка нижняя
+        a1 = list[:3]  # Строка верхняя
+        a2 = list[3:6]  # Строка посередине
+        a3 = list[6:10]  # Строка нижняя
 
-        matrix = np.array([a1, a2, a3]) # Многоуровневый список
+        matrix = np.array([a1, a2, a3])  # Многоуровневый список
 
-        res = matrix_determinant_2x2(matrix) # Расчет результата
+        res = matrix_3x3(matrix)  # Расчет результата
 
         if res is not None:
-            self.ui_3x3.label_3.setText(str(res))
+            self.ui_3x3.label_3.setText(" = " + str(res))
 
 
 class WindowEquation():
@@ -72,11 +66,8 @@ class WindowEquation():
     def __init__(self):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(MainWindow)
-        self.pressed_button()
-        self.ui.pushButton.clicked.connect(self.calculate)
         MainWindow.show()
-
-    def pressed_button(self):
+        self.ui.pushButton.clicked.connect(self.calculate)
         self.ui.action_3x3.triggered.connect(WindowMatrix3x3)
 
     def calculate(self):
@@ -95,25 +86,27 @@ class WindowEquation():
         # Преобразует в строку value, потом в число.
         list = bypass_list([value.text() for name, value in lineedits.items()])
 
-        a1 = list[:4] # Строка верхняя
-        a2 = list[4:8] # Строка посередине
-        a3 = list[8:12] # Строка нижняя
+        a1 = list[:4]  # Строка верхняя
+        a2 = list[4:8]  # Строка посередине
+        a3 = list[8:12]  # Строка нижняя
 
-        matrix = np.array([a1, a2, a3]) # Многоуровневый список
+        matrix = np.array([a1, a2, a3])  # Многоуровневый список
 
         determinant = []
-        determinant.append(matrix_3x3(matrix)) # Записывается результат матрицы
+        # Записывается результат матрицы
+        determinant.append(matrix_3x3(matrix))
 
         for i in range(3):
-            list1, list2, list3 = a1.copy(), a2.copy(), a3.copy() # Копируются строки
+            list1, list2, list3 = a1.copy(), a2.copy(), a3.copy()  # Копируются строки
             # Идет замена каждого элемента для расчетов.
             list1[i] = list1[3]
             list2[i] = list2[3]
             list3[i] = list3[3]
 
-            matrix = np.array([list1, list2, list3]) # Многоуровневый список
+            matrix = np.array([list1, list2, list3])  # Многоуровневый список
 
-            determinant.append(matrix_3x3(matrix)) # Записывается результат матриц
+            # Записывается результат матриц
+            determinant.append(matrix_3x3(matrix))
 
         # Сравнение и вычисление x1, x2, x3
         if determinant[0] > 0 or determinant[0] < 0:
@@ -138,9 +131,7 @@ class WindowEquation():
             self.ui.label_16.setText("x3 = ")
 
 
-ui = WindowEquation()
-# ui_2x2 = WindowMatrix2x2()
-# ui_3x3 = WindowMatrix3x3()
-
-# Run mainloop
-sys.exit(app.exec_())
+if __name__ == '__main__':
+    ui = WindowMatrix3x3()
+    # Run mainloop
+    sys.exit(app.exec_())

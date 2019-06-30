@@ -1,6 +1,5 @@
 import numpy as np
 
-
 # def matrix_determinant_2x2(matrix) -> int:
 #     opr1 = matrix[0][0]*matrix[1][1]
 #     opr2 = matrix[0][1]*matrix[1][0]
