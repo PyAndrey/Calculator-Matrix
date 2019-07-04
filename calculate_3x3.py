@@ -7,6 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from utils import *
+from matrix import matrix_3x3
+import numpy as np
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -169,6 +172,7 @@ class Ui_MainWindow(object):
         self.action.setObjectName("action")
         self.menu.addAction(self.action)
         self.menubar.addAction(self.menu.menuAction())
+        self.pushButton.clicked.connect(self.calculate)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -189,6 +193,31 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Расчитать"))
         self.menu.setTitle(_translate("MainWindow", "Режим"))
         self.action.setText(_translate("MainWindow", "Режим уравнения"))
+
+    def calculate(self):
+        lineedits = {"lineedit_1": self.lineEdit_1,
+                     "lineedit_2": self.lineEdit_2,
+                     "lineedit_3": self.lineEdit_3,
+                     "lineedit_4": self.lineEdit_4,
+                     "lineedit_5": self.lineEdit_5,
+                     "lineedit_6": self.lineEdit_6,
+                     "lineedit_7": self.lineEdit_7,
+                     "lineedit_8": self.lineEdit_8,
+                     "lineedit_9": self.lineEdit_9}
+
+        # Преобразует в строку value, потом в число.
+        list = bypass_list([value.text() for name, value in lineedits.items()])
+
+        a1 = list[:3]  # Строка верхняя
+        a2 = list[3:6]  # Строка посередине
+        a3 = list[6:10]  # Строка нижняя
+
+        matrix = np.array([a1, a2, a3])  # Многоуровневый список
+
+        res = matrix_3x3(matrix)  # Расчет результата
+
+        if res is not None:
+            self.label_3.setText(" = " + str(res))
 
 
 if __name__ == "__main__":

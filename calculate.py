@@ -7,6 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from utils import *
+from matrix import matrix_3x3
+import numpy as np
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -211,6 +214,7 @@ class Ui_MainWindow(object):
         self.action_3x3.setObjectName("action_3x3")
         self.menu.addAction(self.action_3x3)
         self.menubar.addAction(self.menu.menuAction())
+        self.pushButton.clicked.connect(self.calculate)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -250,6 +254,65 @@ class Ui_MainWindow(object):
         self.menu.setTitle(_translate("MainWindow", "Режим"))
         self.action_3x3.setText(_translate("MainWindow", "Режим матрицы 3x3"))
 
+    def calculate(self):
+        lineedits = {"lineedit_1": self.lineEdit_1,
+                     "lineedit_2": self.lineEdit_2,
+                     "lineedit_3": self.lineEdit_3,
+                     "lineedit_4": self.lineEdit_4,
+                     "lineEdit_5": self.lineEdit_5,
+                     "lineEdit_6": self.lineEdit_6,
+                     "lineEdit_7": self.lineEdit_7,
+                     "lineEdit_8": self.lineEdit_8,
+                     "lineEdit_9": self.lineEdit_9,
+                     "lineEdit_10": self.lineEdit_10,
+                     "lineEdit_11": self.lineEdit_11,
+                     "lineEdit_12": self.lineEdit_12}
+        # Преобразует в строку value, потом в число.
+        list = bypass_list([value.text() for name, value in lineedits.items()])
+
+        a1 = list[:4]  # Строка верхняя
+        a2 = list[4:8]  # Строка посередине
+        a3 = list[8:12]  # Строка нижняя
+
+        matrix = np.array([a1, a2, a3])  # Многоуровневый список
+
+        determinant = []
+        # Записывается результат матрицы
+        determinant.append(matrix_3x3(matrix))
+
+        for i in range(3):
+            list1, list2, list3 = a1.copy(), a2.copy(), a3.copy()  # Копируются строки
+            # Идет замена каждого элемента для расчетов.
+            list1[i] = list1[3]
+            list2[i] = list2[3]
+            list3[i] = list3[3]
+
+            matrix = np.array([list1, list2, list3])  # Многоуровневый список
+
+            # Записывается результат матриц
+            determinant.append(matrix_3x3(matrix))
+
+        # Сравнение и вычисление x1, x2, x3
+        if determinant[0] > 0 or determinant[0] < 0:
+            x1 = determinant[1]/determinant[0]
+            x2 = determinant[2]/determinant[0]
+            x3 = determinant[3]/determinant[0]
+
+            self.label_10.setText("△ = " + str(determinant[0]))
+            self.label_11.setText("△1 = " + str(determinant[1]))
+            self.label_12.setText("△2 = " + str(determinant[2]))
+            self.label_13.setText("△3 = " + str(determinant[3]))
+            self.label_14.setText("x1 = " + str(x1))
+            self.label_15.setText("x2 = " + str(x2))    
+            self.label_16.setText("x3 = " + str(x3))
+        else:
+            self.label_10.setText("△= " + str(determinant[0]))
+            self.label_11.setText("△1 = ")
+            self.label_12.setText("△2 = ")
+            self.label_13.setText("△3 = ")
+            self.label_14.setText("x1 = ")
+            self.label_15.setText("x2 = ")
+            self.label_16.setText("x3 = ")
 
 if __name__ == "__main__":
     import sys
@@ -259,4 +322,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
