@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
         res = matrix_3x3(matrix)  # Расчет результата
 
         if res is not None:
-            self.label_3.setText(" = " + str(res))
+            self.label_3.setText(f"= {res}")
 
 
 if __name__ == "__main__":

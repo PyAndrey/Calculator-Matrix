@@ -298,15 +298,15 @@ class Ui_MainWindow(object):
             x2 = determinant[2]/determinant[0]
             x3 = determinant[3]/determinant[0]
 
-            self.label_10.setText("△ = " + str(determinant[0]))
-            self.label_11.setText("△1 = " + str(determinant[1]))
-            self.label_12.setText("△2 = " + str(determinant[2]))
-            self.label_13.setText("△3 = " + str(determinant[3]))
-            self.label_14.setText("x1 = " + str(x1))
-            self.label_15.setText("x2 = " + str(x2))    
-            self.label_16.setText("x3 = " + str(x3))
+            self.label_10.setText(f"△ = {determinant[0]}")
+            self.label_11.setText(f"△1 = {determinant[1]}")
+            self.label_12.setText(f"△2 = {determinant[2]}")
+            self.label_13.setText(f"△3 = {determinant[3]}")
+            self.label_14.setText(f"x1 = {x1}")
+            self.label_15.setText(f"x2 = {x2}")    
+            self.label_16.setText(f"x3 = {x2}")
         else:
-            self.label_10.setText("△= " + str(determinant[0]))
+            self.label_10.setText(f"△= {determinant[0]}")
             self.label_11.setText("△1 = ")
             self.label_12.setText("△2 = ")
             self.label_13.setText("△3 = ")
