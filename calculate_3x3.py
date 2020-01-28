@@ -6,12 +6,14 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from utils import *
-from matrix import matrix_3x3
 import numpy as np
+from PyQt5 import QtCore, QtWidgets
 
-class Ui_MainWindow(object):
+from matrix import matrix_3x3
+from utils import *
+
+
+class UiMainWindow:
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(510, 332)
@@ -206,11 +208,11 @@ class Ui_MainWindow(object):
                      "lineedit_9": self.lineEdit_9}
 
         # Преобразует в строку value, потом в число.
-        list = bypass_list([value.text() for name, value in lineedits.items()])
+        value_to_int = bypass_list([value.text() for name, value in lineedits.items()])
 
-        a1 = list[:3]  # Строка верхняя
-        a2 = list[3:6]  # Строка посередине
-        a3 = list[6:10]  # Строка нижняя
+        a1 = value_to_int[:3]  # Строка верхняя
+        a2 = value_to_int[3:6]  # Строка посередине
+        a3 = value_to_int[6:10]  # Строка нижняя
 
         matrix = np.array([a1, a2, a3])  # Многоуровневый список
 
@@ -224,8 +226,8 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = UiMainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

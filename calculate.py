@@ -11,7 +11,8 @@ from utils import *
 from matrix import matrix_3x3
 import numpy as np
 
-class Ui_MainWindow(object):
+
+class UiMainWindow:
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(510, 332)
@@ -216,10 +217,10 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu.menuAction())
         self.pushButton.clicked.connect(self.calculate)
 
-        self.retranslateUi(MainWindow)
+        self.retranslate(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslate(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Калькулятор"))
         self.label_10.setText(_translate("MainWindow", "△ ="))
@@ -268,17 +269,16 @@ class Ui_MainWindow(object):
                      "lineEdit_11": self.lineEdit_11,
                      "lineEdit_12": self.lineEdit_12}
         # Преобразует в строку value, потом в число.
-        list = bypass_list([value.text() for name, value in lineedits.items()])
+        value_to_int = bypass_list([value.text() for name, value in lineedits.items()])
 
-        a1 = list[:4]  # Строка верхняя
-        a2 = list[4:8]  # Строка посередине
-        a3 = list[8:12]  # Строка нижняя
+        a1 = value_to_int[:4]  # Строка верхняя
+        a2 = value_to_int[4:8]  # Строка посередине
+        a3 = value_to_int[8:12]  # Строка нижняя
 
         matrix = np.array([a1, a2, a3])  # Многоуровневый список
 
-        determinant = []
         # Записывается результат матрицы
-        determinant.append(matrix_3x3(matrix))
+        determinant = [matrix_3x3(matrix)]
 
         for i in range(3):
             list1, list2, list3 = a1.copy(), a2.copy(), a3.copy()  # Копируются строки
@@ -304,7 +304,7 @@ class Ui_MainWindow(object):
             self.label_13.setText(f"△3 = {determinant[3]}")
             self.label_14.setText(f"x1 = {x1}")
             self.label_15.setText(f"x2 = {x2}")    
-            self.label_16.setText(f"x3 = {x2}")
+            self.label_16.setText(f"x3 = {x3}")
         else:
             self.label_10.setText(f"△= {determinant[0]}")
             self.label_11.setText("△1 = ")
@@ -314,11 +314,12 @@ class Ui_MainWindow(object):
             self.label_15.setText("x2 = ")
             self.label_16.setText("x3 = ")
 
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = UiMainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
