@@ -13,7 +13,15 @@ import numpy as np
 
 
 class UiMainWindow:
+    """
+    Класс отображающий окно с уравнениями.
+    """
     def setupUi(self, MainWindow):
+        """
+        Метод оформляющий окно элементами ввода.
+        :param MainWindow:
+        :return:
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(510, 332)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -256,6 +264,10 @@ class UiMainWindow:
         self.action_3x3.setText(_translate("MainWindow", "Режим матрицы 3x3"))
 
     def calculate(self):
+        """
+        Логика уравнений.
+        :return:
+        """
         lineedits = {"lineedit_1": self.lineEdit_1,
                      "lineedit_2": self.lineEdit_2,
                      "lineedit_3": self.lineEdit_3,

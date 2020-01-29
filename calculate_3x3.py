@@ -14,6 +14,7 @@ from utils import *
 
 
 class UiMainWindow:
+    """Класс отображающий окно с матрицей 3x3."""
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(510, 332)
@@ -26,20 +27,20 @@ class UiMainWindow:
         MainWindow.setMaximumSize(QtCore.QSize(510, 332))
         MainWindow.setFocusPolicy(QtCore.Qt.TabFocus)
         MainWindow.setStyleSheet("QPushButton{\n"
-"    height: 50px;\n"
-"    background-color: white;\n"
-"    font-size: 12px;\n"
-"    border: none;\n"
-"    text-align: center;\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    background-color: silver;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color:rgb(159, 159, 159)\n"
-"}")
+                                 "    height: 50px;\n"
+                                 "    background-color: white;\n"
+                                 "    font-size: 12px;\n"
+                                 "    border: none;\n"
+                                 "    text-align: center;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QPushButton:hover{\n"
+                                 "    background-color: silver;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QPushButton:pressed{\n"
+                                 "    background-color:rgb(159, 159, 159)\n"
+                                 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -95,12 +96,12 @@ class UiMainWindow:
         self.label_2.setSizePolicy(sizePolicy)
         self.label_2.setMaximumSize(QtCore.QSize(20, 140))
         self.label_2.setStyleSheet(".QLabel{\n"
-"    margin: 0;\n"
-"    padding: 0;\n"
-"    height: 0;\n"
-"    border: none;\n"
-"    border-left: 1px solid #333;\n"
-"}")
+                                   "    margin: 0;\n"
+                                   "    padding: 0;\n"
+                                   "    height: 0;\n"
+                                   "    border: none;\n"
+                                   "    border-left: 1px solid #333;\n"
+                                   "}")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 1, 3, 1)
@@ -113,12 +114,12 @@ class UiMainWindow:
         self.labe_1.setMaximumSize(QtCore.QSize(20, 140))
         self.labe_1.setTabletTracking(False)
         self.labe_1.setStyleSheet(".QLabel{\n"
-"    margin: 0;\n"
-"    padding: 0;\n"
-"    height: 0;\n"
-"    border: none;\n"
-"    border-right: 1px solid #333;\n"
-"}")
+                                  "    margin: 0;\n"
+                                  "    padding: 0;\n"
+                                  "    height: 0;\n"
+                                  "    border: none;\n"
+                                  "    border-right: 1px solid #333;\n"
+                                  "}")
         self.labe_1.setFrameShadow(QtWidgets.QFrame.Plain)
         self.labe_1.setText("")
         self.labe_1.setObjectName("labe_1")
@@ -197,6 +198,7 @@ class UiMainWindow:
         self.action.setText(_translate("MainWindow", "Режим уравнения"))
 
     def calculate(self):
+        """Логика окна с матрицей."""
         lineedits = {"lineedit_1": self.lineEdit_1,
                      "lineedit_2": self.lineEdit_2,
                      "lineedit_3": self.lineEdit_3,
@@ -224,10 +226,10 @@ class UiMainWindow:
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = UiMainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec())
-
